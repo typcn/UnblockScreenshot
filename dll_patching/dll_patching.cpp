@@ -49,6 +49,8 @@ int main(int argc, char const *argv[]) {
 
 	FILE *outfile = fopen("user32_patched.dll", "wb");
 	fwrite(data, fsize, 1, outfile);
+	fflush(outfile);
+	fclose(outfile);
 	printf("Patching complete, user32_patched.dll saved to current working directory.\n");
 	getchar();
 	return 0;
