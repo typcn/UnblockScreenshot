@@ -29,7 +29,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UnblockScreenshot.cpp">
+    <ClCompile Include="dll_patching.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
