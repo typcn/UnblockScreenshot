@@ -38,14 +38,14 @@ int main(int argc, char const *argv[]) {
 	printf("File offset is: 0x%" PRIxPTR "\n", file_offset);
 
 	uint8_t *func_data = data + file_offset;
-	
-	while (true) {
-		func_data[0] = 0x90;
-		func_data++;
-		if (func_data[0] == 0xC2 || func_data[0] == 0xC3) {
-			break;
-		}
-	}
+
+	// mov eax, 1     retn
+	func_data[0] = 0xB8;
+	func_data[1] = 0x01;
+	func_data[2] = 0x00;
+	func_data[3] = 0x00;
+	func_data[4] = 0x00;
+	func_data[5] = 0xC3;
 
 	FILE *outfile = fopen("user32_patched.dll", "wb");
 	fwrite(data, fsize, 1, outfile);

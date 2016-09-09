@@ -20,17 +20,16 @@ void fucktheshitup() {
 	uint8_t *func_data = (uint8_t *)GetProcAddress(GetModuleHandle(L"user32.dll"), "SetWindowDisplayAffinity");
 
 	DWORD old_prot;
-	VirtualProtect(func_data, 128, PAGE_EXECUTE_READWRITE, &old_prot);
+	VirtualProtect(func_data, 6, PAGE_EXECUTE_READWRITE, &old_prot);
 
-	while (true) {
-		func_data[0] = 0x90;
-		func_data++;
-		if (func_data[0] == 0xC2 || func_data[0] == 0xC3) {
-			break;
-		}
-	}
+	func_data[0] = 0xB8;
+	func_data[1] = 0x01;
+	func_data[2] = 0x00;
+	func_data[3] = 0x00;
+	func_data[4] = 0x00;
+	func_data[5] = 0xC3;
 
-	VirtualProtect(func_data, 128, old_prot, NULL);
+	VirtualProtect(func_data, 6, old_prot, NULL);
 }
 
 BOOL APIENTRY DllMain( HMODULE hModule,
